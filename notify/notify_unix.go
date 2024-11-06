@@ -11,6 +11,11 @@ import (
 
 // Notify displays a desktop notification.
 func Notify(appName string, title string, text string) error {
-	cmd := exec.Command("notify-send", "-e", "-a", config.GUIAppName, "-i", config.AppName, title, text)
+	cmdArgs := []string{}
+	if !config.AppConfig.PersistNotifications {
+		cmdArgs = append(cmdArgs, "-e")
+	}
+	cmdArgs = append(cmdArgs, "-a", config.GUIAppName, "-i", config.AppName, title, text)
+	cmd := exec.Command("notify-send", cmdArgs...)
 	return cmd.Run()
 }
