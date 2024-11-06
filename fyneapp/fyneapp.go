@@ -134,7 +134,10 @@ func Preferences() {
 			default:
 				config.AppConfig.FortuneTimer = 0
 			}
-			config.AppConfig.Save()
+			err := config.AppConfig.Save()
+			if err != nil {
+				notify.NotifyError(err)
+			}
 			theme.SetIconTheme()
 			notify.FortuneTickerReset()
 			preferencesWindow.Hide()

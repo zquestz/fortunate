@@ -55,7 +55,10 @@ func display() {
 }
 
 func sendNotification() {
-	notify.NotifyFortune()
+	err := notify.NotifyFortune()
+	if err != nil {
+		notify.NotifyError(err)
+	}
 }
 
 func about() {

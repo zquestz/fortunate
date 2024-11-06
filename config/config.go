@@ -18,9 +18,10 @@ const (
 
 // Config type for application configuration.
 type Config struct {
-	DisplayVersion bool   `json:"-"`
-	IconTheme      string `json:"iconTheme"`
-	FortuneTimer   int    `json:"fortuneTimer,string"`
+	DisplayVersion       bool   `json:"-"`
+	IconTheme            string `json:"iconTheme"`
+	FortuneTimer         int    `json:"fortuneTimer,string"`
+	PersistNotifications bool   `json:"persistNotifications,string"`
 }
 
 // Stores the app configuration

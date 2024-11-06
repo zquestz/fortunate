@@ -10,7 +10,7 @@ import (
 )
 
 // Notify displays a desktop notification.
-func Notify(appName string, title string, text string, iconPath string) {
+func Notify(appName string, title string, text string) error {
 	cmd := exec.Command("notify-send", "-e", "-a", config.GUIAppName, "-i", config.AppName, title, text)
-	cmd.Run()
+	return cmd.Run()
 }

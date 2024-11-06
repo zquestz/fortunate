@@ -1,6 +1,7 @@
 package notify
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/zquestz/fortunate/config"
@@ -9,10 +10,17 @@ import (
 
 var fortuneTicker *time.Ticker
 
-func NotifyFortune() {
-	output, _ := fortune.Run()
+func NotifyFortune() error {
+	output, err := fortune.Run()
+	if err != nil {
+		return err
+	}
 
-	Notify(config.GUIAppName, config.GUIAppName, output, "")
+	return Notify(config.GUIAppName, config.GUIAppName, output)
+}
+
+func NotifyError(err error) error {
+	return Notify(config.GUIAppName, fmt.Sprintf("%s Error", config.GUIAppName), err.Error())
 }
 
 func FortuneTicker() {
@@ -27,7 +35,10 @@ func FortuneTicker() {
 	for {
 		select {
 		case <-fortuneTicker.C:
-			NotifyFortune()
+			err := NotifyFortune()
+			if err != nil {
+				NotifyError(err)
+			}
 		}
 	}
 }
