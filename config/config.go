@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -44,13 +45,36 @@ func (c *Config) Load() error {
 	return nil
 }
 
+// Save saves the configuration to ~/.config/fortunate/config.
+func (c *Config) Save() error {
+	configurationPath, err := c.configPath()
+	if err != nil {
+		return err
+	}
+
+	os.MkdirAll(configurationPath, 0755)
+
+	var buf bytes.Buffer
+	err = ucl.Encode(&buf, AppConfig, "  ", "json", "")
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(filepath.Join(configurationPath, "config"), buf.Bytes(), 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (c *Config) loadConfig() ([]byte, error) {
-	configuration, err := c.configPath()
+	configurationPath, err := c.configPath()
 	if err != nil {
 		return nil, err
 	}
 
-	f, err := os.Open(configuration)
+	f, err := os.Open(filepath.Join(configurationPath, "config"))
 	if err != nil {
 		if os.IsNotExist(err) {
 			return nil, nil
@@ -80,7 +104,7 @@ func (c *Config) configPath() (string, error) {
 		return "", err
 	}
 
-	return filepath.Join(h, ".config", AppName, "config"), nil
+	return filepath.Join(h, ".config", AppName), nil
 }
 
 func (c *Config) applyConf(conf []byte) error {

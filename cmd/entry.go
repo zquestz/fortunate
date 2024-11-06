@@ -7,6 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/zquestz/fortunate/config"
+	"github.com/zquestz/fortunate/fyneapp"
 	"github.com/zquestz/fortunate/tray"
 )
 
@@ -65,7 +66,8 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		help(cmd, args)
 	}
 
-	tray.Run()
+	trayReady, trayExit := tray.Run()
+	fyneapp.Run(trayReady, trayExit)
 
 	return nil
 }

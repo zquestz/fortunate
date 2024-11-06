@@ -4,30 +4,24 @@
 package tray
 
 import (
-	"github.com/getlantern/systray"
+	"fyne.io/systray"
 	"github.com/zquestz/fortunate/config"
 	"github.com/zquestz/fortunate/fortune"
-	"github.com/zquestz/fortunate/icon"
+	"github.com/zquestz/fortunate/fyneapp"
 	"github.com/zquestz/fortunate/notify"
+	"github.com/zquestz/fortunate/theme"
 )
 
 const (
 	appName = "Fortunate"
 )
 
-func Run() {
-	systray.Run(onReady, onExit)
+func Run() (func(), func()) {
+	return systray.RunWithExternalLoop(onReady, onExit)
 }
 
 func onReady() {
-	switch iconTheme := config.AppConfig.IconTheme; iconTheme {
-	case "dark":
-		systray.SetTemplateIcon(icon.DataDark, icon.DataDark)
-	case "light":
-		systray.SetTemplateIcon(icon.DataLight, icon.DataLight)
-	default:
-		systray.SetTemplateIcon(icon.Data, icon.Data)
-	}
+	theme.SetIconTheme()
 
 	systray.SetTitle(appName)
 	systray.SetTooltip(appName)
@@ -59,6 +53,7 @@ func onReady() {
 }
 
 func display() {
+	fyneapp.Display()
 }
 
 func sendNotification() {
@@ -68,13 +63,15 @@ func sendNotification() {
 }
 
 func about() {
+	fyneapp.About()
 }
 
 func preferences() {
+	fyneapp.Preferences()
 }
 
 func quit() {
-	systray.Quit()
+	fyneapp.Quit()
 }
 
 func onExit() {
