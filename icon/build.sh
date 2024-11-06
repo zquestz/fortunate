@@ -16,8 +16,8 @@ fi
 
 OUTPUT=icon_unix.go
 echo Generating $OUTPUT
-echo "//go:build linux || darwin" > $OUTPUT
-echo "// +build linux darwin" >> $OUTPUT
+echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
+echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "lotus.png" | $GOPATH/bin/2goarray Data icon >> $OUTPUT
 if [ $? -ne 0 ]; then
@@ -27,8 +27,8 @@ fi
 
 OUTPUT=icon_light_unix.go
 echo Generating $OUTPUT
-echo "//go:build linux || darwin" > $OUTPUT
-echo "// +build linux darwin" >> $OUTPUT
+echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
+echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "lotus-light.png" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT
 if [ $? -ne 0 ]; then
@@ -38,8 +38,8 @@ fi
 
 OUTPUT=icon_dark_unix.go
 echo Generating $OUTPUT
-echo "//go:build linux || darwin" > $OUTPUT
-echo "// +build linux darwin" >> $OUTPUT
+echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
+echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "lotus-dark.png" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT
 if [ $? -ne 0 ]; then

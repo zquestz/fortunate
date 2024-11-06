@@ -1,5 +1,5 @@
-//go:build linux
-// +build linux
+//go:build linux || dragonfly || freebsd || netbsd || openbsd
+// +build linux dragonfly freebsd netbsd openbsd
 
 package notify
 

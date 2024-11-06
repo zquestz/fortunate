@@ -1,5 +1,5 @@
-//go:build linux || windows || darwin
-// +build linux windows darwin
+//go:build linux || windows || dragonfly || freebsd || netbsd || openbsd || darwin
+// +build linux windows dragonfly freebsd netbsd openbsd darwin
 
 package tray
 

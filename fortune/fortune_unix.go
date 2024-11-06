@@ -1,5 +1,5 @@
-//go:build linux || darwin
-// +build linux darwin
+//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd
+// +build linux darwin dragonfly freebsd netbsd openbsd
 
 package fortune
 
