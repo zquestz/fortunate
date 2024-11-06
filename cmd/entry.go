@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/zquestz/fortunate/config"
 	"github.com/zquestz/fortunate/fyneapp"
+	"github.com/zquestz/fortunate/notify"
 	"github.com/zquestz/fortunate/tray"
 )
 
@@ -50,8 +51,6 @@ func capitalize(str string) string {
 func prepareFlags() {
 	EntryCmd.PersistentFlags().BoolVar(
 		&config.AppConfig.DisplayVersion, "version", false, "display version")
-	EntryCmd.PersistentFlags().StringVarP(
-		&config.AppConfig.IconTheme, "icon-theme", "i", config.AppConfig.IconTheme, "icon theme")
 }
 
 // Where all the work happens.
@@ -65,6 +64,9 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		help := cmd.HelpFunc()
 		help(cmd, args)
 	}
+
+	// Fire background notification timer.
+	go notify.FortuneTicker()
 
 	trayReady, trayExit := tray.Run()
 	fyneapp.Run(trayReady, trayExit)

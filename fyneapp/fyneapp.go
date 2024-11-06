@@ -2,10 +2,12 @@ package fyneapp
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/zquestz/fortunate/config"
 	"github.com/zquestz/fortunate/icon"
+	"github.com/zquestz/fortunate/notify"
 	"github.com/zquestz/fortunate/theme"
 
 	"fyne.io/fyne/v2"
@@ -78,26 +80,63 @@ func Preferences() {
 	preferencesWindow = appGUI.NewWindow("Preferences")
 
 	iconTheme := widget.NewSelect(
-		[]string{"default", "light", "dark"},
+		[]string{"Default", "Light", "Dark"},
 		nil,
 	)
 
-	switch selectedTheme := config.AppConfig.IconTheme; selectedTheme {
+	switch selectedTheme := strings.ToLower(config.AppConfig.IconTheme); selectedTheme {
 	case "dark":
-		iconTheme.SetSelected("dark")
+		iconTheme.SetSelected("Dark")
 	case "light":
-		iconTheme.SetSelected("light")
+		iconTheme.SetSelected("Light")
 	default:
-		iconTheme.SetSelected("default")
+		iconTheme.SetSelected("Default")
+	}
+
+	notifyFortuneTimes := widget.NewSelect(
+		[]string{"Disabled", "1 hour", "3 hours", "6 hours", "12 hours", "24 hours"},
+		nil,
+	)
+
+	switch config.AppConfig.FortuneTimer {
+	case 1:
+		notifyFortuneTimes.SetSelected("1 hour")
+	case 3:
+		notifyFortuneTimes.SetSelected("3 hours")
+	case 6:
+		notifyFortuneTimes.SetSelected("6 hours")
+	case 12:
+		notifyFortuneTimes.SetSelected("12 hours")
+	case 24:
+		notifyFortuneTimes.SetSelected("24 hours")
+	default:
+		notifyFortuneTimes.SetSelected("Disabled")
 	}
 
 	form := &widget.Form{
 		Items: []*widget.FormItem{ // we can specify items in the constructor
-			{Text: "Icon Theme", Widget: iconTheme}},
+			{Text: "Icon Theme", Widget: iconTheme},
+			{Text: "Fortune Timer", Widget: notifyFortuneTimes},
+		},
 		OnSubmit: func() { // optional, handle form submission
-			config.AppConfig.IconTheme = iconTheme.Selected
-			theme.SetIconTheme()
+			config.AppConfig.IconTheme = strings.ToLower(iconTheme.Selected)
+			switch notifyFortuneTimes.Selected {
+			case "1 hour":
+				config.AppConfig.FortuneTimer = 1
+			case "3 hours":
+				config.AppConfig.FortuneTimer = 3
+			case "6 hours":
+				config.AppConfig.FortuneTimer = 6
+			case "12 hours":
+				config.AppConfig.FortuneTimer = 12
+			case "24 hours":
+				config.AppConfig.FortuneTimer = 24
+			default:
+				config.AppConfig.FortuneTimer = 0
+			}
 			config.AppConfig.Save()
+			theme.SetIconTheme()
+			notify.FortuneTickerReset()
 			preferencesWindow.Hide()
 		},
 		OnCancel: func() {
@@ -116,7 +155,7 @@ func Preferences() {
 
 	preferencesWindow.SetContent(content)
 	preferencesWindow.CenterOnScreen()
-	// preferencesWindow.SetFixedSize(true)
+	preferencesWindow.SetFixedSize(true)
 	preferencesWindow.Show()
 }
 

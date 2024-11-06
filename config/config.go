@@ -20,6 +20,7 @@ const (
 type Config struct {
 	DisplayVersion bool   `json:"-"`
 	IconTheme      string `json:"iconTheme"`
+	FortuneTimer   int    `json:"fortuneTimer,string"`
 }
 
 // Stores the app configuration

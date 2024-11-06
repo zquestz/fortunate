@@ -5,8 +5,6 @@ package tray
 
 import (
 	"fyne.io/systray"
-	"github.com/zquestz/fortunate/config"
-	"github.com/zquestz/fortunate/fortune"
 	"github.com/zquestz/fortunate/fyneapp"
 	"github.com/zquestz/fortunate/notify"
 	"github.com/zquestz/fortunate/theme"
@@ -57,9 +55,7 @@ func display() {
 }
 
 func sendNotification() {
-	output, _ := fortune.Run()
-
-	notify.Notify(config.GUIAppName, config.GUIAppName, output, "")
+	notify.NotifyFortune()
 }
 
 func about() {
