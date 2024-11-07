@@ -1,8 +1,8 @@
 APPNAME = fortunate
 
-# Default PREFIX to /usr/local
+# Default PREFIX to /usr
 ifeq ($(PREFIX),)
-    PREFIX := /usr/local
+    PREFIX := /usr
 endif
 
 all:
