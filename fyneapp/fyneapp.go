@@ -180,23 +180,18 @@ func Preferences() {
 		},
 	}
 
-	content := container.NewVBox(
-		form,
-	)
-
 	// Hack to make sure we don't accidently quit.
 	preferencesWindow.SetCloseIntercept(func() {
 		preferencesWindow.Hide()
 	})
 
-	preferencesWindow.SetContent(content)
+	preferencesWindow.SetContent(form)
 	preferencesWindow.CenterOnScreen()
 	preferencesWindow.SetFixedSize(true)
 	preferencesWindow.Show()
 }
 
 func Display() {
-
 }
 
 func Quit() {
