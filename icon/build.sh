@@ -19,7 +19,7 @@ echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
 echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
-cat "lotus.png" | $GOPATH/bin/2goarray Data icon >> $OUTPUT
+cat "fortunate.png" | $GOPATH/bin/2goarray Data icon >> $OUTPUT
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
@@ -30,7 +30,7 @@ echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
 echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
-cat "lotus-light.png" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT
+cat "fortunate-light.png" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
@@ -41,7 +41,7 @@ echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
 echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
-cat "lotus-dark.png" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT
+cat "fortunate-dark.png" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
@@ -53,7 +53,7 @@ echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
 echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
-cat "lotus.ico" | $GOPATH/bin/2goarray Data icon >> $OUTPUT_WINDOWS
+cat "fortunate.ico" | $GOPATH/bin/2goarray Data icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
@@ -64,7 +64,7 @@ echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
 echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
-cat "lotus-light.ico" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT_WINDOWS
+cat "fortunate-light.ico" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
@@ -75,7 +75,7 @@ echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
 echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
-cat "lotus-dark.ico" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT_WINDOWS
+cat "fortunate-dark.ico" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
