@@ -113,10 +113,16 @@ func Preferences() {
 		notifyFortuneTimes.SetSelected("Disabled")
 	}
 
+	persistNotifications := widget.NewCheck(
+		"", nil)
+
+	persistNotifications.SetChecked(config.AppConfig.PersistNotifications)
+
 	form := &widget.Form{
 		Items: []*widget.FormItem{ // we can specify items in the constructor
 			{Text: "Icon Theme", Widget: iconTheme},
 			{Text: "Fortune Timer", Widget: notifyFortuneTimes},
+			{Text: "Persist Notifications", Widget: persistNotifications},
 		},
 		OnSubmit: func() { // optional, handle form submission
 			config.AppConfig.IconTheme = strings.ToLower(iconTheme.Selected)
@@ -134,6 +140,7 @@ func Preferences() {
 			default:
 				config.AppConfig.FortuneTimer = 0
 			}
+			config.AppConfig.PersistNotifications = persistNotifications.Checked
 			err := config.AppConfig.Save()
 			if err != nil {
 				notify.NotifyError(err)
