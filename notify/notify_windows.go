@@ -3,7 +3,9 @@
 
 package notify
 
+import "errors"
+
 // Notify displays a desktop notification.
 func Notify(appName string, title string, text string) error {
-	return nil
+	return errors.New("not supported")
 }

@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/zquestz/fortunate/config"
+	"github.com/zquestz/fortunate/fortune"
 	"github.com/zquestz/fortunate/icon"
 	"github.com/zquestz/fortunate/notify"
 	"github.com/zquestz/fortunate/theme"
@@ -113,16 +114,38 @@ func Preferences() {
 		notifyFortuneTimes.SetSelected("Disabled")
 	}
 
-	persistNotifications := widget.NewCheck(
-		"", nil)
+	shortFortunes := widget.NewCheck("Short", nil)
+	shortFortunes.SetChecked(config.AppConfig.ShortFortunes)
 
+	longFortunes := widget.NewCheck("Long", nil)
+	longFortunes.SetChecked(config.AppConfig.LongFortunes)
+
+	fortuneLength := container.NewHBox(shortFortunes, longFortunes)
+
+	persistNotifications := widget.NewCheck("", nil)
 	persistNotifications.SetChecked(config.AppConfig.PersistNotifications)
+
+	lists, err := fortune.Lists()
+	if err != nil {
+		notify.NotifyError(err)
+	}
+
+	fortuneLists := widget.NewCheckGroup(lists, nil)
+	fortuneLists.SetSelected(config.AppConfig.FortuneLists)
+
+	scrollableLists := container.NewScroll(fortuneLists)
+	scrollableLists.SetMinSize(fyne.Size{
+		Height: 250,
+		Width:  300,
+	})
 
 	form := &widget.Form{
 		Items: []*widget.FormItem{ // we can specify items in the constructor
 			{Text: "Icon Theme", Widget: iconTheme},
 			{Text: "Fortune Timer", Widget: notifyFortuneTimes},
+			{Text: "Fortune Length", Widget: fortuneLength},
 			{Text: "Persist Notifications", Widget: persistNotifications},
+			{Text: "Fortune Lists", Widget: scrollableLists},
 		},
 		OnSubmit: func() { // optional, handle form submission
 			config.AppConfig.IconTheme = strings.ToLower(iconTheme.Selected)
@@ -140,7 +163,10 @@ func Preferences() {
 			default:
 				config.AppConfig.FortuneTimer = 0
 			}
+			config.AppConfig.ShortFortunes = shortFortunes.Checked
+			config.AppConfig.LongFortunes = longFortunes.Checked
 			config.AppConfig.PersistNotifications = persistNotifications.Checked
+			config.AppConfig.FortuneLists = fortuneLists.Selected
 			err := config.AppConfig.Save()
 			if err != nil {
 				notify.NotifyError(err)
