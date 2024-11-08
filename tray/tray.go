@@ -4,10 +4,11 @@
 package tray
 
 import (
-	"fyne.io/systray"
 	"github.com/zquestz/fortunate/fyneapp"
 	"github.com/zquestz/fortunate/notify"
 	"github.com/zquestz/fortunate/theme"
+
+	"fyne.io/systray"
 )
 
 const (
@@ -28,7 +29,7 @@ func onReady() {
 	mNotify := systray.AddMenuItem("Notify Fortune", "Notify Fortune")
 	systray.AddSeparator()
 	mAbout := systray.AddMenuItem("About", "About")
-	mPreferences := systray.AddMenuItem("Preferences", "Preferences")
+	mSettings := systray.AddMenuItem("Settings", "Settings")
 	mQuit := systray.AddMenuItem("Quit", "Quit")
 
 	go func() {
@@ -40,8 +41,8 @@ func onReady() {
 				sendNotification()
 			case <-mAbout.ClickedCh:
 				about()
-			case <-mPreferences.ClickedCh:
-				preferences()
+			case <-mSettings.ClickedCh:
+				settings()
 			case <-mQuit.ClickedCh:
 				quit()
 				return
@@ -65,8 +66,8 @@ func about() {
 	fyneapp.About()
 }
 
-func preferences() {
-	fyneapp.Preferences()
+func settings() {
+	fyneapp.Settings()
 }
 
 func quit() {
