@@ -17,7 +17,6 @@ fi
 OUTPUT=icon_unix.go
 echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "fortunate.png" | $GOPATH/bin/2goarray Data icon >> $OUTPUT
 if [ $? -ne 0 ]; then
@@ -30,7 +29,6 @@ mv $OUTPUT.formatted $OUTPUT
 OUTPUT=icon_light_unix.go
 echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "fortunate-light.png" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT
 if [ $? -ne 0 ]; then
@@ -43,7 +41,6 @@ mv $OUTPUT.formatted $OUTPUT
 OUTPUT=icon_dark_unix.go
 echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo "// +build linux darwin dragonfly freebsd netbsd openbsd" >> $OUTPUT
 echo >> $OUTPUT
 cat "fortunate-dark.png" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT
 if [ $? -ne 0 ]; then
@@ -56,7 +53,6 @@ mv $OUTPUT.formatted $OUTPUT
 OUTPUT_WINDOWS=icon_windows.go
 echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
-echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
 cat "fortunate.ico" | $GOPATH/bin/2goarray Data icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
@@ -69,7 +65,6 @@ mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
 OUTPUT_WINDOWS=icon_light_windows.go
 echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
-echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
 cat "fortunate-light.ico" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
@@ -82,7 +77,6 @@ mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
 OUTPUT_WINDOWS=icon_dark_windows.go
 echo Generating $OUTPUT_WINDOWS
 echo "//go:build windows" > $OUTPUT_WINDOWS
-echo "// +build windows" >> $OUTPUT_WINDOWS
 echo >> $OUTPUT_WINDOWS
 cat "fortunate-dark.ico" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT_WINDOWS
 if [ $? -ne 0 ]; then
