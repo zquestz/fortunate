@@ -23,19 +23,8 @@ func Settings() {
 
 	settingsWindow = appGUI.NewWindow("Settings")
 
-	iconTheme := widget.NewSelect(
-		[]string{"Default", "Light", "Dark"},
-		nil,
-	)
-
-	buildIconTheme(iconTheme)
-
-	notifyFortuneTimes := widget.NewSelect(
-		[]string{"Disabled", "1 hour", "3 hours", "6 hours", "12 hours", "24 hours"},
-		nil,
-	)
-
-	buildNotifyFortuneTimes(notifyFortuneTimes)
+	iconTheme := buildIconTheme()
+	notifyFortuneTimes := buildNotifyFortuneTimes()
 
 	shortFortunes := widget.NewCheck("Short", nil)
 	shortFortunes.SetChecked(config.AppConfig.ShortFortunes)
@@ -114,7 +103,12 @@ func Settings() {
 	settingsWindow.Show()
 }
 
-func buildIconTheme(iconTheme *widget.Select) {
+func buildIconTheme() *widget.Select {
+	iconTheme := widget.NewSelect(
+		[]string{"Default", "Light", "Dark"},
+		nil,
+	)
+
 	switch selectedTheme := strings.ToLower(config.AppConfig.IconTheme); selectedTheme {
 	case "dark":
 		iconTheme.SetSelected("Dark")
@@ -123,9 +117,16 @@ func buildIconTheme(iconTheme *widget.Select) {
 	default:
 		iconTheme.SetSelected("Default")
 	}
+
+	return iconTheme
 }
 
-func buildNotifyFortuneTimes(notifyFortuneTimes *widget.Select) {
+func buildNotifyFortuneTimes() *widget.Select {
+	notifyFortuneTimes := widget.NewSelect(
+		[]string{"Disabled", "1 hour", "3 hours", "6 hours", "12 hours", "24 hours"},
+		nil,
+	)
+
 	switch config.AppConfig.FortuneTimer {
 	case 1:
 		notifyFortuneTimes.SetSelected("1 hour")
@@ -140,6 +141,8 @@ func buildNotifyFortuneTimes(notifyFortuneTimes *widget.Select) {
 	default:
 		notifyFortuneTimes.SetSelected("Disabled")
 	}
+
+	return notifyFortuneTimes
 }
 
 func setNotifyFortuneTimes(notifyFortuneTimes *widget.Select) {
