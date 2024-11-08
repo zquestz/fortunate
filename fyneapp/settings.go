@@ -28,34 +28,14 @@ func Settings() {
 		nil,
 	)
 
-	switch selectedTheme := strings.ToLower(config.AppConfig.IconTheme); selectedTheme {
-	case "dark":
-		iconTheme.SetSelected("Dark")
-	case "light":
-		iconTheme.SetSelected("Light")
-	default:
-		iconTheme.SetSelected("Default")
-	}
+	buildIconTheme(iconTheme)
 
 	notifyFortuneTimes := widget.NewSelect(
 		[]string{"Disabled", "1 hour", "3 hours", "6 hours", "12 hours", "24 hours"},
 		nil,
 	)
 
-	switch config.AppConfig.FortuneTimer {
-	case 1:
-		notifyFortuneTimes.SetSelected("1 hour")
-	case 3:
-		notifyFortuneTimes.SetSelected("3 hours")
-	case 6:
-		notifyFortuneTimes.SetSelected("6 hours")
-	case 12:
-		notifyFortuneTimes.SetSelected("12 hours")
-	case 24:
-		notifyFortuneTimes.SetSelected("24 hours")
-	default:
-		notifyFortuneTimes.SetSelected("Disabled")
-	}
+	buildNotifyFortuneTimes(notifyFortuneTimes)
 
 	shortFortunes := widget.NewCheck("Short", nil)
 	shortFortunes.SetChecked(config.AppConfig.ShortFortunes)
@@ -88,20 +68,7 @@ func Settings() {
 
 	submitFunc := func() {
 		config.AppConfig.IconTheme = strings.ToLower(iconTheme.Selected)
-		switch notifyFortuneTimes.Selected {
-		case "1 hour":
-			config.AppConfig.FortuneTimer = 1
-		case "3 hours":
-			config.AppConfig.FortuneTimer = 3
-		case "6 hours":
-			config.AppConfig.FortuneTimer = 6
-		case "12 hours":
-			config.AppConfig.FortuneTimer = 12
-		case "24 hours":
-			config.AppConfig.FortuneTimer = 24
-		default:
-			config.AppConfig.FortuneTimer = 0
-		}
+		setNotifyFortuneTimes(notifyFortuneTimes)
 		config.AppConfig.ShortFortunes = shortFortunes.Checked
 		config.AppConfig.LongFortunes = longFortunes.Checked
 		config.AppConfig.PersistNotifications = persistNotifications.Checked
@@ -145,4 +112,49 @@ func Settings() {
 	settingsWindow.CenterOnScreen()
 	settingsWindow.SetFixedSize(true)
 	settingsWindow.Show()
+}
+
+func buildIconTheme(iconTheme *widget.Select) {
+	switch selectedTheme := strings.ToLower(config.AppConfig.IconTheme); selectedTheme {
+	case "dark":
+		iconTheme.SetSelected("Dark")
+	case "light":
+		iconTheme.SetSelected("Light")
+	default:
+		iconTheme.SetSelected("Default")
+	}
+}
+
+func buildNotifyFortuneTimes(notifyFortuneTimes *widget.Select) {
+	switch config.AppConfig.FortuneTimer {
+	case 1:
+		notifyFortuneTimes.SetSelected("1 hour")
+	case 3:
+		notifyFortuneTimes.SetSelected("3 hours")
+	case 6:
+		notifyFortuneTimes.SetSelected("6 hours")
+	case 12:
+		notifyFortuneTimes.SetSelected("12 hours")
+	case 24:
+		notifyFortuneTimes.SetSelected("24 hours")
+	default:
+		notifyFortuneTimes.SetSelected("Disabled")
+	}
+}
+
+func setNotifyFortuneTimes(notifyFortuneTimes *widget.Select) {
+	switch notifyFortuneTimes.Selected {
+	case "1 hour":
+		config.AppConfig.FortuneTimer = 1
+	case "3 hours":
+		config.AppConfig.FortuneTimer = 3
+	case "6 hours":
+		config.AppConfig.FortuneTimer = 6
+	case "12 hours":
+		config.AppConfig.FortuneTimer = 12
+	case "24 hours":
+		config.AppConfig.FortuneTimer = 24
+	default:
+		config.AppConfig.FortuneTimer = 0
+	}
 }
