@@ -24,6 +24,8 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
 fi
+gofmt -s $OUTPUT > $OUTPUT.formatted
+mv $OUTPUT.formatted $OUTPUT
 
 OUTPUT=icon_light_unix.go
 echo Generating $OUTPUT
@@ -35,6 +37,8 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
 fi
+gofmt -s $OUTPUT > $OUTPUT.formatted
+mv $OUTPUT.formatted $OUTPUT
 
 OUTPUT=icon_dark_unix.go
 echo Generating $OUTPUT
@@ -46,7 +50,8 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT
     exit
 fi
-echo Finished
+gofmt -s $OUTPUT > $OUTPUT.formatted
+mv $OUTPUT.formatted $OUTPUT
 
 OUTPUT_WINDOWS=icon_windows.go
 echo Generating $OUTPUT_WINDOWS
@@ -58,6 +63,8 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
 fi
+gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
+mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
 
 OUTPUT_WINDOWS=icon_light_windows.go
 echo Generating $OUTPUT_WINDOWS
@@ -69,6 +76,8 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
 fi
+gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
+mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
 
 OUTPUT_WINDOWS=icon_dark_windows.go
 echo Generating $OUTPUT_WINDOWS
@@ -80,4 +89,7 @@ if [ $? -ne 0 ]; then
     echo Failure generating $OUTPUT_WINDOWS
     exit
 fi
+gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
+mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
+
 echo Finished
