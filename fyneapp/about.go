@@ -51,7 +51,7 @@ func About() {
 		}
 	})
 
-	// Hack to make sure we don't accidently quit.
+	// Hack to make sure we don't accidentally quit.
 	aboutWindow.SetCloseIntercept(func() {
 		aboutWindow.Hide()
 	})
