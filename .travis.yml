@@ -1,3 +1,6 @@
+before_install:
+  - sudo apt-get -y install libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libgl-dev libxxf86vm-dev
+
 language: go
 go:
   - 1.23.2
