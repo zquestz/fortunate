@@ -1,4 +1,6 @@
-# fortunate
+![Fortunate](https://raw.githubusercontent.com/zquestz/fortunate/d9d565fe655a6fa69316a536bb655b629320d4aa/icon/fortunate.png)
+
+# Fortunate
 
 [![License][License-Image]][License-URL] [![ReportCard][ReportCard-Image]][ReportCard-URL] [![Build][Build-Status-Image]][Build-Status-URL]
 
