@@ -1,0 +1,15 @@
+language: go
+go:
+  - 1.23.2
+  - 1.22.2
+  - 1.21.9
+os:
+  - linux
+install:
+  - go get -v github.com/zquestz/fortunate
+script:
+  - go build
+  - go fmt ./...
+  - go vet ./...
+  - go test -i -race ./...
+  - go test -v -race ./...
