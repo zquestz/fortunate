@@ -2,7 +2,7 @@
 
 # Fortunate
 
-[![License][License-Image]][License-URL] [![ReportCard][ReportCard-Image]][ReportCard-URL] [![Build][Build-Status-Image]][Build-Status-URL]
+[![License][License-Image]][License-URL] [![ReportCard][ReportCard-Image]][ReportCard-URL] [![Build][Build-Status-Image]][Build-Status-URL] [![Release][Release-Image]][Release-URL]
 
 **Fortunate** is an open-source motivational app for Linux that delivers uplifting quotes and thoughtful messages. Powered by `fortune-mod`, it offers both a clean graphical interface and system notifications to keep you inspired throughout your day.
 
@@ -11,7 +11,8 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Build/Install](#buildinstall-from-source)
+- [Package Install](#package-install)
+- [Source Build/Install](#source-buildinstall)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Custom Fortune Collections](#custom-fortune-collections)
@@ -31,7 +32,15 @@
 - **System Integration**: Runs seamlessly in your system tray with dark/light theme support
 - **Resource Efficient**: Written in Go for minimal system impact
 
-## Build/Install from Source
+## Package Install
+
+**Arch Linux**
+
+```bash
+yay -S fortunate
+```
+
+## Source Build/Install
 
 ### Dependencies
 
@@ -168,3 +177,5 @@ Fortunate is licensed under the MIT License. See the [LICENSE](LICENSE) file for
 [ReportCard-Image]: https://goreportcard.com/badge/github.com/zquestz/fortunate
 [Build-Status-URL]: https://app.travis-ci.com/github/zquestz/fortunate
 [Build-Status-Image]: https://app.travis-ci.com/zquestz/fortunate.svg?branch=main
+[Release-URL]: https://github.com/zquestz/fortunate/releases/tag/v1.0.0
+[Release-Image]: https://img.shields.io/badge/release-v1.0.0-1eb0fc.svg
