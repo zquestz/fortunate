@@ -1,16 +1,18 @@
 module github.com/zquestz/fortunate
 
+replace fyne.io/systray => github.com/zquestz/systray v1.11.1-0.20241116221913-b0f74fc527ee
+
 go 1.23.2
 
 require (
 	fyne.io/fyne/v2 v2.5.2
+	fyne.io/systray v1.11.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v1.8.1
 	github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a
 )
 
 require (
-	fyne.io/systray v1.11.0 // indirect
 	github.com/BurntSushi/toml v1.4.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fredbi/uri v1.1.0 // indirect

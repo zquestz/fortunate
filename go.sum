@@ -39,8 +39,6 @@ cloud.google.com/go/storage v1.10.0/go.mod h1:FLPqc6j+Ki4BU591ie1oL6qBQGu2Bl/tZ9
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 fyne.io/fyne/v2 v2.5.2 h1:eSyGTmSkv10yAdAeHpDet6u2KkKxOGFc14kQu81We7Q=
 fyne.io/fyne/v2 v2.5.2/go.mod h1:26gqPDvtaxHeyct+C0BBjuGd2zwAJlPkUGSBrb+d7Ug=
-fyne.io/systray v1.11.0 h1:D9HISlxSkx+jHSniMBR6fCFOUjk1x/OOOJLa9lJYAKg=
-fyne.io/systray v1.11.0/go.mod h1:RVwqP9nYMo7h5zViCBHri2FgjXF7H2cub7MAq4NSoLs=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/toml v1.4.0 h1:kuoIxZQy2WRRk1pttg9asf+WVv6tWQuBNVmK8+nqPr0=
 github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
@@ -298,6 +296,8 @@ github.com/yuin/goldmark v1.7.8 h1:iERMLn0/QJeHFhxSt3p6PeN9mGnvIKSpG9YYorDMnic=
 github.com/yuin/goldmark v1.7.8/go.mod h1:uzxRWxtg69N339t3louHJ7+O03ezfj6PlliRlaOzY1E=
 github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a h1:Dvd4T0NxSAwRRMQ+dN/t3UIWSedKxAwJzDNdz8RtQ4c=
 github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a/go.mod h1:M54hiL2fkAYVcY+k9MgIhTeEHwCfzFK6jRN8aBuPug4=
+github.com/zquestz/systray v1.11.1-0.20241116221913-b0f74fc527ee h1:+khbNqMnk+w0D1t7sPoiMKkcfR2BdMggGuxSbvATr3M=
+github.com/zquestz/systray v1.11.1-0.20241116221913-b0f74fc527ee/go.mod h1:RVwqP9nYMo7h5zViCBHri2FgjXF7H2cub7MAq4NSoLs=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
 go.etcd.io/etcd/client/pkg/v3 v3.5.0/go.mod h1:IJHfcCEKxYu1Os13ZdwCwIUTUVGYTSAM3YSwc9/Ac1g=
 go.etcd.io/etcd/client/v2 v2.305.0/go.mod h1:h9puh54ZTgAKtEbut2oe9P4L/oqKCVB6xsXlzd7alYQ=

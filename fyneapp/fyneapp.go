@@ -7,6 +7,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/driver/desktop"
+	"fyne.io/systray"
 )
 
 const appID = "at.greyh.fortunate"
@@ -30,6 +31,7 @@ func Run() {
 	desktopApp = appGUI.(desktop.App)
 	setSystrayMenu()
 	setSystrayIcon()
+	setActivate()
 
 	go startFortuneTicker()
 
@@ -74,4 +76,12 @@ func setSystrayMenu() {
 			about()
 		}))
 	desktopApp.SetSystemTrayMenu(m)
+}
+
+func setActivate() {
+	if desktopApp == nil {
+		return
+	}
+
+	systray.SetActivateFunc(display)
 }
