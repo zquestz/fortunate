@@ -84,6 +84,7 @@ sudo make install
 
 - Launch Fortunate from your applications menu or run `fortunate` in your terminal
 - The application runs in your system tray (look for the lotus icon)
+- Left-click the tray icon to display a fortune
 - Right-click the tray icon to access the menu:
   - Display Fortune
   - Notify Fortune
