@@ -62,6 +62,14 @@ sudo apt-get install git make golang gcc libgl1-mesa-dev xorg-dev fortune-mod
 sudo dnf install git make golang gcc libXcursor-devel libXrandr-devel mesa-libGL-devel libXi-devel libXinerama-devel libXxf86vm-devel fortune-mod
 ```
 
+**macOS**
+
+First install XCode and then execute:
+
+```bash
+brew install fortune
+```
+
 ### Build and Install
 
 ```bash

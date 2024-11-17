@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
 
 	"github.com/zquestz/fortunate/config"
@@ -21,7 +22,7 @@ var (
 
 // Run runs fortune.
 func Run() (string, string, error) {
-	args := []string{"-c"}
+	args := []string{""}
 
 	if config.AppConfig.ShortFortunes {
 		args = append(args, "-s")
@@ -42,12 +43,20 @@ func Run() (string, string, error) {
 	}
 
 	splitOutput := strings.Split(string(output), "\n")
-	if len(splitOutput) < 3 {
-		return "", "", errors.New("failed to parse fortune output")
+	if runtime.GOOS != "darwin" {
+		if len(splitOutput) < 3 {
+			return "", "", errors.New("failed to parse fortune output")
+		}
 	}
 
+	content := ""
 	cookie := shortenCookie(splitOutput[0])
-	content := strings.Join(splitOutput[2:], "\n")
+	if runtime.GOOS == "darwin" {
+		content = string(output)
+		cookie = ""
+	} else {
+		content = strings.Join(splitOutput[2:], "\n")
+	}
 
 	return cookie, content, nil
 }
