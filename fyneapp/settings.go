@@ -34,6 +34,11 @@ func settings() {
 	fortuneLength := container.NewHBox(shortFortunes, longFortunes)
 
 	showCookie := widget.NewCheck("", nil)
+
+	if !fortune.CookieSupported {
+		config.AppConfig.ShowCookie = false
+	}
+
 	showCookie.SetChecked(config.AppConfig.ShowCookie)
 
 	lists, err := fortune.Lists()
@@ -75,12 +80,16 @@ func settings() {
 			{Text: "Icon Theme", Widget: iconTheme},
 			{Text: "Fortune Timer", Widget: notifyFortuneTimes},
 			{Text: "Fortune Length", Widget: fortuneLength},
-			{Text: "Show Cookie", Widget: showCookie},
-			{Text: "Fortune Lists", Widget: scrollableLists},
 		},
 		OnCancel: cancelFunc,
 		OnSubmit: submitFunc,
 	}
+
+	if fortune.CookieSupported {
+		form.Items = append(form.Items, &widget.FormItem{Text: "Show Cookie", Widget: showCookie})
+	}
+
+	form.Items = append(form.Items, &widget.FormItem{Text: "Fortune Lists", Widget: scrollableLists})
 
 	newSettingsWindow.Canvas().SetOnTypedKey(func(key *fyne.KeyEvent) {
 		switch key.Name {

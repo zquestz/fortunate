@@ -4,7 +4,7 @@
 
 [![License][License-Image]][License-URL] [![ReportCard][ReportCard-Image]][ReportCard-URL] [![Build][Build-Status-Image]][Build-Status-URL] [![Release][Release-Image]][Release-URL]
 
-**Fortunate** is an open-source motivational app for Linux that delivers uplifting quotes and thoughtful messages. Powered by `fortune-mod`, it offers both a clean graphical interface and system notifications to keep you inspired throughout your day.
+**Fortunate** is an open-source motivational app for Linux and macOS that delivers uplifting quotes and thoughtful messages. Powered by `fortune-mod`, it offers both a clean graphical interface and system notifications to keep you inspired throughout your day.
 
 ![Screenshot](screenshot.png)
 
@@ -62,6 +62,14 @@ sudo apt-get install git make golang gcc libgl1-mesa-dev xorg-dev fortune-mod
 sudo dnf install git make golang gcc libXcursor-devel libXrandr-devel mesa-libGL-devel libXi-devel libXinerama-devel libXxf86vm-devel fortune-mod
 ```
 
+**macOS**
+
+First install XCode and then execute:
+
+```bash
+brew install golang fortune
+```
+
 ### Build and Install
 
 ```bash
@@ -74,8 +82,14 @@ cd fortunate
 # Build the project
 make
 
-# Install system-wide
+# Linux Install
 sudo make install
+
+# macOS Install
+make install-darwin
+
+# macOS LaunchAgent Install
+make install-darwin-startup
 ```
 
 ## Usage
@@ -83,9 +97,21 @@ sudo make install
 ### Basic Usage
 
 - Launch Fortunate from your applications menu or run `fortunate` in your terminal
-- The application runs in your system tray (look for the lotus icon)
+- The application runs in your system tray or menubar (look for the lotus icon)
+
+**System Tray**
+
 - Left-click the tray icon to display a fortune
 - Right-click the tray icon to access the menu:
+  - Display Fortune
+  - Notify Fortune
+  - Settings
+  - About
+  - Quit
+
+**Menubar**
+
+- Click the menubar icon to access the menu:
   - Display Fortune
   - Notify Fortune
   - Settings
@@ -129,8 +155,10 @@ This repository includes additional custom fortune collections located in `fortu
 ### Installation
 
 The fortune directory location varies by distribution:
+
 - Debian/Ubuntu/Fedora: `/usr/share/games/fortunes/`
 - Arch Linux: `/usr/share/fortune/`
+- macOS: `/usr/local/share/games/fortunes`
 
 Copy the fortune files to your system's fortune directory:
 
@@ -140,6 +168,12 @@ sudo cp fortunes/* /usr/share/games/fortunes/
 
 # For Arch Linux
 sudo cp fortunes/* /usr/share/fortune/
+
+# For macOS
+cp fortunes/* /usr/local/share/games/fortunes/
+strfile /usr/local/share/games/fortunes/appreciation
+strfile /usr/local/share/games/fortunes/inspiration
+strfile /usr/local/share/games/fortunes/motivation
 ```
 
 Note: You may need to check your specific distribution's fortune directory location if it differs from these common paths.

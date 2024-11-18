@@ -2,6 +2,7 @@ package fyneapp
 
 import (
 	"github.com/zquestz/fortunate/config"
+	"github.com/zquestz/fortunate/fortune"
 	"github.com/zquestz/fortunate/icon"
 
 	"fyne.io/fyne/v2"
@@ -33,7 +34,12 @@ func Run() {
 	setSystrayIcon()
 	setActivate()
 
+	fortune.CheckCookieSupported()
 	go startFortuneTicker()
+
+	appGUI.Lifecycle().SetOnStarted(func() {
+		setActivationPolicy()
+	})
 
 	appGUI.Run()
 }
