@@ -7,6 +7,7 @@ go 1.23.2
 require (
 	fyne.io/fyne/v2 v2.5.2
 	fyne.io/systray v1.11.0
+	github.com/Masterminds/semver/v3 v3.3.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v1.8.1
 	github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a

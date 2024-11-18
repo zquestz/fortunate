@@ -9,19 +9,27 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/zquestz/fortunate/config"
+
+	"github.com/Masterminds/semver/v3"
 )
 
 var (
-	listMatcher   = regexp.MustCompile(`\s+(\d+\.\d+\%)\s([\w|-]+)`)
-	cookieMatcher = regexp.MustCompile(`\((.*)\)`)
+	listMatcher     = regexp.MustCompile(`\s+(\d+\.\d+\%)\s([\w|-]+)`)
+	cookieMatcher   = regexp.MustCompile(`\((.*)\)`)
+	CookieSupported = true
 )
 
 // Run runs fortune.
 func Run() (string, string, error) {
-	args := []string{"-c"}
+	args := []string{}
+
+	if cookieEnabled() {
+		args = append(args, "-c")
+	}
 
 	if config.AppConfig.ShortFortunes {
 		args = append(args, "-s")
@@ -41,15 +49,19 @@ func Run() (string, string, error) {
 		return "", "", err
 	}
 
-	splitOutput := strings.Split(string(output), "\n")
-	if len(splitOutput) < 3 {
-		return "", "", errors.New("failed to parse fortune output")
+	if cookieEnabled() {
+		splitOutput := strings.Split(string(output), "\n")
+		if len(splitOutput) < 3 {
+			return "", "", errors.New("failed to parse fortune output")
+		}
+
+		cookie := shortenCookie(splitOutput[0])
+		content := strings.Join(splitOutput[2:], "\n")
+
+		return cookie, content, nil
 	}
 
-	cookie := shortenCookie(splitOutput[0])
-	content := strings.Join(splitOutput[2:], "\n")
-
-	return cookie, content, nil
+	return "", string(output), nil
 }
 
 // Lists returns a list of installed fortune lists.
@@ -73,7 +85,52 @@ func Lists() ([]string, error) {
 		list = append(list, matches[2])
 	}
 
+	sort.Strings(list)
+
 	return list, nil
+}
+
+// CheckCookieSupported checks if the locally installed fortune supports cookie display.
+func CheckCookieSupported() error {
+	cmd := exec.Command("fortune", "-v")
+	output, err := cmd.Output()
+	if err != nil {
+		CookieSupported = false
+		return err
+	}
+
+	splitOutput := strings.Split(string(output), " ")
+	if len(splitOutput) < 3 {
+		CookieSupported = false
+		return nil
+	}
+
+	version := strings.TrimSpace(splitOutput[2])
+
+	versionConstraint, err := semver.NewConstraint(">= 2.22.0, < 1000")
+	if err != nil {
+		CookieSupported = false
+		return err
+	}
+
+	semVer, err := semver.NewVersion(version)
+	if err != nil {
+		CookieSupported = false
+		return err
+	}
+
+	CookieSupported = versionConstraint.Check(semVer)
+
+	return nil
+}
+
+// cookieEnabled returns if cookie support should be enabled.
+func cookieEnabled() bool {
+	if config.AppConfig.ShowCookie && CookieSupported {
+		return true
+	}
+
+	return false
 }
 
 // shortenCookie removes the path from the cookie.
