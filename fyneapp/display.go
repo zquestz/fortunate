@@ -8,6 +8,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/driver/desktop"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -24,6 +25,11 @@ func display() {
 	var newDisplayWindow fyne.Window
 
 	newDisplayWindow = appGUI.NewWindow(config.GUIAppName)
+
+	ctrlW := &desktop.CustomShortcut{KeyName: fyne.KeyW, Modifier: fyne.KeyModifierShortcutDefault}
+	newDisplayWindow.Canvas().AddShortcut(ctrlW, func(shortcut fyne.Shortcut) {
+		newDisplayWindow.Hide()
+	})
 
 	i := canvas.NewImageFromResource(&fyne.StaticResource{
 		StaticName:    config.GUIAppName,

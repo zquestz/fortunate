@@ -8,6 +8,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/driver/desktop"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -21,6 +22,11 @@ func settings() {
 	}
 
 	newSettingsWindow := appGUI.NewWindow("Settings")
+
+	ctrlW := &desktop.CustomShortcut{KeyName: fyne.KeyW, Modifier: fyne.KeyModifierShortcutDefault}
+	newSettingsWindow.Canvas().AddShortcut(ctrlW, func(shortcut fyne.Shortcut) {
+		newSettingsWindow.Hide()
+	})
 
 	iconTheme := buildIconTheme()
 	notifyFortuneTimes := buildNotifyFortuneTimes()
