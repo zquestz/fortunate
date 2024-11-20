@@ -84,9 +84,11 @@ func display() {
 			closeFunc()
 		case "Return":
 			nextFunc()
-		case "C":
-			copyFunc()
 		}
+	})
+
+	newDisplayWindow.Canvas().AddShortcut(&fyne.ShortcutCopy{}, func(shortcut fyne.Shortcut) {
+		copyFunc()
 	})
 
 	newDisplayWindow.SetCloseIntercept(func() {
