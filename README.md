@@ -87,9 +87,6 @@ sudo make install
 
 # macOS Install
 make install-darwin
-
-# macOS LaunchAgent Install
-make install-darwin-startup
 ```
 
 ## Usage
@@ -212,5 +209,5 @@ Fortunate is licensed under the MIT License. See the [LICENSE](LICENSE) file for
 [ReportCard-Image]: https://goreportcard.com/badge/github.com/zquestz/fortunate
 [Build-Status-URL]: https://app.travis-ci.com/github/zquestz/fortunate
 [Build-Status-Image]: https://app.travis-ci.com/zquestz/fortunate.svg?branch=main
-[Release-URL]: https://github.com/zquestz/fortunate/releases/tag/v1.0.4
-[Release-Image]: https://img.shields.io/badge/release-v1.0.4-1eb0fc.svg
+[Release-URL]: https://github.com/zquestz/fortunate/releases/tag/v1.1.0
+[Release-Image]: https://img.shields.io/badge/release-v1.1.0-1eb0fc.svg

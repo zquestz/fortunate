@@ -1,0 +1,11 @@
+Website = "https://github.com/zquestz/fortunate"
+
+[Details]
+  Icon = "Icon.png"
+  Name = "Fortunate"
+  ID = "at.greyh.fortunate"
+  Build = 7
+
+[LinuxAndBSD]
+  Categories = ["Utility"]
+  Comment = "Beautiful motivation/fortune app"

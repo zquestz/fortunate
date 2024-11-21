@@ -1,8 +1,14 @@
 APPNAME = fortunate
+GUIAPPNAME = Fortunate
 
 # Default PREFIX to /usr
 ifeq ($(PREFIX),)
     PREFIX := /usr
+endif
+
+# Default GOPATH to ~/go
+ifeq ($(GOPATH),)
+    GOPATH := ~/go
 endif
 
 all:
@@ -13,23 +19,14 @@ clean:
 
 install:
 	install -Dm 755 $(APPNAME) $(DESTDIR)$(PREFIX)/bin/$(APPNAME)
-	install -Dm 644 $(APPNAME).desktop $(DESTDIR)$(PREFIX)/share/applications/$(APPNAME).desktop
-	install -Dm 644 icon/$(APPNAME).png $(DESTDIR)$(PREFIX)/share/icons/$(APPNAME).png
+	install -Dm 644 $(GUIAPPNAME).desktop $(DESTDIR)$(PREFIX)/share/applications/$(GUIAPPNAME).desktop
+	install -Dm 644 Icon.png $(DESTDIR)$(PREFIX)/share/pixmaps/$(GUIAPPNAME).png
 
 install-darwin:
-	install -dm 755 /usr/local/bin
-	install -m 755 $(APPNAME) /usr/local/bin/$(APPNAME)
-
-install-darwin-startup:
-	install -m 755 $(APPNAME).plist ~/Library/LaunchAgents/$(APPNAME).plist
+	go install fyne.io/fyne/v2/cmd/fyne@latest
+	$(GOPATH)/bin/fyne install --release
 
 uninstall:
 	rm $(DESTDIR)$(PREFIX)/bin/$(APPNAME)
-	rm $(DESTDIR)$(PREFIX)/share/applications/$(APPNAME).desktop
-	rm $(DESTDIR)$(PREFIX)/share/icons/$(APPNAME).png
-
-uninstall-darwin:
-	rm /usr/local/bin/$(APPNAME)
-
-uninstall-darwin-startup:
-	rm ~/Library/LaunchAgents/$(APPNAME).plist
+	rm $(DESTDIR)$(PREFIX)/share/applications/$(GUIAPPNAME).desktop
+	rm $(DESTDIR)$(PREFIX)/share/pixmaps/$(GUIAPPNAME).png

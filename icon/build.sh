@@ -14,6 +14,18 @@ if [ ! -e "$GOPATH/bin/2goarray" ]; then
     fi
 fi
 
+OUTPUT=large_icon_unix.go
+echo Generating $OUTPUT
+echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
+echo >> $OUTPUT
+cat "../Icon.png" | $GOPATH/bin/2goarray DataLarge icon >> $OUTPUT
+if [ $? -ne 0 ]; then
+    echo Failure generating $OUTPUT
+    exit
+fi
+gofmt -s $OUTPUT > $OUTPUT.formatted
+mv $OUTPUT.formatted $OUTPUT
+
 OUTPUT=icon_unix.go
 echo Generating $OUTPUT
 echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
@@ -49,6 +61,18 @@ if [ $? -ne 0 ]; then
 fi
 gofmt -s $OUTPUT > $OUTPUT.formatted
 mv $OUTPUT.formatted $OUTPUT
+
+OUTPUT_WINDOWS=large_icon_windows.go
+echo Generating $OUTPUT_WINDOWS
+echo "//go:build windows" > $OUTPUT_WINDOWS
+echo >> $OUTPUT_WINDOWS
+cat "../Icon.ico" | $GOPATH/bin/2goarray DataLarge icon >> $OUTPUT_WINDOWS
+if [ $? -ne 0 ]; then
+    echo Failure generating $OUTPUT_WINDOWS
+    exit
+fi
+gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
+mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
 
 OUTPUT_WINDOWS=icon_windows.go
 echo Generating $OUTPUT_WINDOWS

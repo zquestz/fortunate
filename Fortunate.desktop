@@ -1,9 +1,7 @@
 [Desktop Entry]
+Type=Application
 Name=Fortunate
 Exec=fortunate
-Terminal=false
-Type=Application
-Icon=fortunate
+Icon=Fortunate
 Comment=Beautiful motivation/fortune app
 Categories=Utility;
-StartupNotify=false
