@@ -25,7 +25,7 @@ func Run() {
 		Version: config.Version,
 		Icon: &fyne.StaticResource{
 			StaticName:    config.GUIAppName,
-			StaticContent: icon.Data,
+			StaticContent: icon.DataLarge,
 		},
 	})
 
