@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
@@ -18,9 +19,11 @@ import (
 )
 
 var (
-	listMatcher     = regexp.MustCompile(`\s+(\d+\.\d+\%)\s([\w|-]+)`)
-	cookieMatcher   = regexp.MustCompile(`\((.*)\)`)
-	CookieSupported = true
+	listMatcher        = regexp.MustCompile(`\s+(\d+\.\d+\%)\s([\w|-]+)`)
+	cookieMatcher      = regexp.MustCompile(`\((.*)\)`)
+	CookieSupported    = true
+	fortuneBinary      = "fortune"
+	localFortuneBinary = "/usr/local/bin/fortune"
 )
 
 // Run runs fortune.
@@ -43,7 +46,7 @@ func Run() (string, string, error) {
 		args = append(args, config.AppConfig.FortuneLists...)
 	}
 
-	cmd := exec.Command("fortune", args...)
+	cmd := exec.Command(fortuneBinary, args...)
 	output, err := cmd.Output()
 	if err != nil {
 		return "", "", err
@@ -66,7 +69,7 @@ func Run() (string, string, error) {
 
 // Lists returns a list of installed fortune lists.
 func Lists() ([]string, error) {
-	cmd := exec.Command("fortune", "-f")
+	cmd := exec.Command(fortuneBinary, "-f")
 	lists, err := cmd.CombinedOutput()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,13 @@ func Lists() ([]string, error) {
 
 // CheckCookieSupported checks if the locally installed fortune supports cookie display.
 func CheckCookieSupported() error {
-	cmd := exec.Command("fortune", "-v")
+	err := checkFortuneExists()
+	if err != nil {
+		CookieSupported = false
+		return err
+	}
+
+	cmd := exec.Command(fortuneBinary, "-v")
 	output, err := cmd.Output()
 	if err != nil {
 		CookieSupported = false
@@ -122,6 +131,21 @@ func CheckCookieSupported() error {
 	CookieSupported = versionConstraint.Check(semVer)
 
 	return nil
+}
+
+// checkFortuneExists checks for the existence of fortune.
+func checkFortuneExists() error {
+	cmd := exec.Command(fortuneBinary, "-v")
+	_, err := cmd.Output()
+	if err != nil {
+		_, statErr := os.Stat(localFortuneBinary)
+		if statErr == nil {
+			fortuneBinary = localFortuneBinary
+			return nil
+		}
+	}
+
+	return err
 }
 
 // cookieEnabled returns if cookie support should be enabled.

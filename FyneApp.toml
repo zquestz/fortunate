@@ -4,8 +4,8 @@ Website = "https://github.com/zquestz/fortunate"
   Icon = "Icon.png"
   Name = "Fortunate"
   ID = "at.greyh.fortunate"
-  Version = "1.1.0"
-  Build = 8
+  Version = "1.1.1"
+  Build = 1
 
 [LinuxAndBSD]
   Categories = ["Utility"]

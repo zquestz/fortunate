@@ -23,7 +23,6 @@ install:
 	install -Dm 644 Icon.png $(DESTDIR)$(PREFIX)/share/pixmaps/$(GUIAPPNAME).png
 
 install-darwin:
-	sudo launchctl config user path "$$(brew --prefix)/bin:${PATH}"
 	go install fyne.io/fyne/v2/cmd/fyne@latest
 	$(GOPATH)/bin/fyne install --release
 
