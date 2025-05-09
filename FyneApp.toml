@@ -4,9 +4,12 @@ Website = "https://github.com/zquestz/fortunate"
   Icon = "Icon.png"
   Name = "Fortunate"
   ID = "at.greyh.fortunate"
-  Version = "1.1.1"
+  Version = "1.1.2"
   Build = 1
 
 [LinuxAndBSD]
   Categories = ["Utility"]
   Comment = "Beautiful motivation/fortune app"
+
+[Migrations]
+  fyneDo = true

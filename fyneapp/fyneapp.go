@@ -89,5 +89,7 @@ func setActivate() {
 		return
 	}
 
-	systray.SetActivateFunc(display)
+	systray.SetActivateFunc(func() {
+		fyne.DoAndWait(display)
+	})
 }
