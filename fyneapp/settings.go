@@ -111,8 +111,8 @@ func settings() {
 	})
 
 	newSettingsWindow.SetContent(form)
-	newSettingsWindow.CenterOnScreen()
 	newSettingsWindow.SetFixedSize(true)
+	newSettingsWindow.CenterOnScreen()
 	newSettingsWindow.Show()
 
 	// Destroy old window if it exists.

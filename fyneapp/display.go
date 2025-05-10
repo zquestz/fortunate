@@ -95,8 +95,8 @@ func display() {
 		newDisplayWindow.Hide()
 	})
 
-	newDisplayWindow.CenterOnScreen()
 	newDisplayWindow.SetFixedSize(true)
+	newDisplayWindow.CenterOnScreen()
 	newDisplayWindow.Show()
 
 	if displayWindow != nil && !displayWindow.Content().Visible() {

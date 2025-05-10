@@ -65,7 +65,7 @@ func about() {
 		aboutWindow.Hide()
 	})
 
-	aboutWindow.CenterOnScreen()
 	aboutWindow.SetFixedSize(true)
+	aboutWindow.CenterOnScreen()
 	aboutWindow.Show()
 }
