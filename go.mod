@@ -1,5 +1,7 @@
 module github.com/zquestz/fortunate
 
+replace fyne.io/fyne/v2 => github.com/zquestz/fyne/v2 v2.6.2
+
 replace fyne.io/systray => github.com/zquestz/systray v1.11.1-0.20250509205549-1863350e7a4c
 
 go 1.23.2

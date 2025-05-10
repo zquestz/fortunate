@@ -1,5 +1,3 @@
-fyne.io/fyne/v2 v2.6.1 h1:kjPJD4/rBS9m2nHJp+npPSuaK79yj6ObMTuzR6VQ1Is=
-fyne.io/fyne/v2 v2.6.1/go.mod h1:YZt7SksjvrSNJCwbWFV32WON3mE1Sr7L41D29qMZ/lU=
 github.com/BurntSushi/toml v1.5.0 h1:W5quZX/G/csjUnuI8SUYlsHs9M38FC7znL0lIO+DvMg=
 github.com/BurntSushi/toml v1.5.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
 github.com/Masterminds/semver/v3 v3.3.1 h1:QtNSWtVZ3nBfk8mAOu/B6v7FMJ+NHTIgUPi7rj+4nv4=
@@ -75,6 +73,8 @@ github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOf
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/yuin/goldmark v1.7.11 h1:ZCxLyDMtz0nT2HFfsYG8WZ47Trip2+JyLysKcMYE5bo=
 github.com/yuin/goldmark v1.7.11/go.mod h1:ip/1k0VRfGynBgxOz0yCqHrbZXhcjxyuS66Brc7iBKg=
+github.com/zquestz/fyne/v2 v2.6.2 h1:iAfXmnV16hPcX2AZZ1ooaoggMqeZa978UVpTDU+1eTg=
+github.com/zquestz/fyne/v2 v2.6.2/go.mod h1:YZt7SksjvrSNJCwbWFV32WON3mE1Sr7L41D29qMZ/lU=
 github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a h1:Dvd4T0NxSAwRRMQ+dN/t3UIWSedKxAwJzDNdz8RtQ4c=
 github.com/zquestz/go-ucl v0.0.0-20220615095619-8a3686d7543a/go.mod h1:M54hiL2fkAYVcY+k9MgIhTeEHwCfzFK6jRN8aBuPug4=
 github.com/zquestz/systray v1.11.1-0.20250509205549-1863350e7a4c h1:MUZToQPfq6/zjiNOyiXL8xB/fnEYwvf1RLgm1sDLENs=
