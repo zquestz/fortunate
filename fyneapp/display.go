@@ -47,7 +47,7 @@ func display() {
 	fortune.SetText(fortuneContent)
 
 	copyFunc := func() {
-		newDisplayWindow.Clipboard().SetContent(fortuneContent)
+		appGUI.Clipboard().SetContent(fortuneContent)
 	}
 
 	closeFunc := func() {
