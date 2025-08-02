@@ -19,6 +19,7 @@ var aboutWindow fyne.Window
 // about creates/shows the about window.
 func about() {
 	if aboutWindow != nil {
+		aboutWindow.Content().Show()
 		aboutWindow.Show()
 		return
 	}
@@ -27,6 +28,7 @@ func about() {
 
 	ctrlW := &desktop.CustomShortcut{KeyName: fyne.KeyW, Modifier: fyne.KeyModifierShortcutDefault}
 	aboutWindow.Canvas().AddShortcut(ctrlW, func(shortcut fyne.Shortcut) {
+		aboutWindow.Content().Hide()
 		aboutWindow.Hide()
 	})
 
@@ -57,15 +59,18 @@ func about() {
 
 	aboutWindow.Canvas().SetOnTypedKey(func(key *fyne.KeyEvent) {
 		if key.Name == "Escape" {
+			aboutWindow.Content().Hide()
 			aboutWindow.Hide()
 		}
 	})
 
 	aboutWindow.SetCloseIntercept(func() {
+		aboutWindow.Content().Hide()
 		aboutWindow.Hide()
 	})
 
 	aboutWindow.SetFixedSize(true)
 	aboutWindow.CenterOnScreen()
+	aboutWindow.Content().Show()
 	aboutWindow.Show()
 }

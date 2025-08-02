@@ -17,6 +17,7 @@ var settingsWindow fyne.Window
 // settings creates/shows the settings window.
 func settings() {
 	if settingsWindow != nil && settingsWindow.Content().Visible() {
+		settingsWindow.Content().Show()
 		settingsWindow.Show()
 		return
 	}
@@ -25,6 +26,7 @@ func settings() {
 
 	ctrlW := &desktop.CustomShortcut{KeyName: fyne.KeyW, Modifier: fyne.KeyModifierShortcutDefault}
 	newSettingsWindow.Canvas().AddShortcut(ctrlW, func(shortcut fyne.Shortcut) {
+		newSettingsWindow.Content().Hide()
 		newSettingsWindow.Hide()
 	})
 
@@ -62,6 +64,7 @@ func settings() {
 	})
 
 	cancelFunc := func() {
+		newSettingsWindow.Content().Hide()
 		newSettingsWindow.Hide()
 	}
 
@@ -78,6 +81,7 @@ func settings() {
 		}
 		setSystrayIcon()
 		fortuneTickerReset()
+		newSettingsWindow.Content().Hide()
 		newSettingsWindow.Hide()
 	}
 
@@ -107,12 +111,14 @@ func settings() {
 	})
 
 	newSettingsWindow.SetCloseIntercept(func() {
+		newSettingsWindow.Content().Hide()
 		newSettingsWindow.Hide()
 	})
 
 	newSettingsWindow.SetContent(form)
 	newSettingsWindow.SetFixedSize(true)
 	newSettingsWindow.CenterOnScreen()
+	newSettingsWindow.Content().Show()
 	newSettingsWindow.Show()
 
 	// Destroy old window if it exists.

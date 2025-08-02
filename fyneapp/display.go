@@ -18,6 +18,7 @@ var displayWindow fyne.Window
 // display creates/shows the display fortune window.
 func display() {
 	if displayWindow != nil && displayWindow.Content().Visible() {
+		displayWindow.Content().Show()
 		displayWindow.Show()
 		return
 	}
@@ -28,6 +29,7 @@ func display() {
 
 	ctrlW := &desktop.CustomShortcut{KeyName: fyne.KeyW, Modifier: fyne.KeyModifierShortcutDefault}
 	newDisplayWindow.Canvas().AddShortcut(ctrlW, func(shortcut fyne.Shortcut) {
+		newDisplayWindow.Content().Hide()
 		newDisplayWindow.Hide()
 	})
 
@@ -51,10 +53,12 @@ func display() {
 	}
 
 	closeFunc := func() {
+		newDisplayWindow.Content().Hide()
 		newDisplayWindow.Hide()
 	}
 
 	nextFunc := func() {
+		newDisplayWindow.Content().Hide()
 		newDisplayWindow.Hide()
 		display()
 	}
@@ -92,11 +96,13 @@ func display() {
 	})
 
 	newDisplayWindow.SetCloseIntercept(func() {
+		newDisplayWindow.Content().Hide()
 		newDisplayWindow.Hide()
 	})
 
 	newDisplayWindow.SetFixedSize(true)
 	newDisplayWindow.CenterOnScreen()
+	newDisplayWindow.Content().Show()
 	newDisplayWindow.Show()
 
 	if displayWindow != nil && !displayWindow.Content().Visible() {
