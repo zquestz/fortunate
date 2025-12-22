@@ -207,7 +207,7 @@ Fortunate is licensed under the MIT License. See the [LICENSE](LICENSE) file for
 [License-Image]: https://img.shields.io/npm/l/express.svg
 [ReportCard-URL]: https://goreportcard.com/report/zquestz/fortunate
 [ReportCard-Image]: https://goreportcard.com/badge/github.com/zquestz/fortunate
-[Build-Status-URL]: https://app.travis-ci.com/github/zquestz/fortunate
-[Build-Status-Image]: https://app.travis-ci.com/zquestz/fortunate.svg?branch=main
+[Build-Status-URL]: https://github.com/zquestz/fortunate/actions/workflows/ci.yml
+[Build-Status-Image]: https://github.com/zquestz/fortunate/actions/workflows/ci.yml/badge.svg?branch=main
 [Release-URL]: https://github.com/zquestz/fortunate/releases/tag/v1.1.4
 [Release-Image]: https://img.shields.io/badge/release-v1.1.4-1eb0fc.svg
