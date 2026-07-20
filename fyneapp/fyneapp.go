@@ -27,6 +27,7 @@ func Run() {
 			StaticName:    config.GUIAppName,
 			StaticContent: icon.DataLarge,
 		},
+		Migrations: map[string]bool{"fyneDo": true},
 	})
 
 	desktopApp = appGUI.(desktop.App)

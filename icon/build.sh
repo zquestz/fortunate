@@ -1,113 +1,47 @@
-#/bin/sh
+#!/bin/sh
 
 if [ -z "$GOPATH" ]; then
-    echo GOPATH environment variable not set
-    exit
+    echo "GOPATH environment variable not set"
+    exit 1
 fi
 
 if [ ! -e "$GOPATH/bin/2goarray" ]; then
     echo "Installing 2goarray..."
-    go install github.com/cratonica/2goarray
-    if [ $? -ne 0 ]; then
-        echo Failure executing go get github.com/cratonica/2goarray
-        exit
+    if ! go install github.com/cratonica/2goarray@latest; then
+        echo "Failure executing go install github.com/cratonica/2goarray@latest"
+        exit 1
     fi
 fi
 
-OUTPUT=large_icon_unix.go
-echo Generating $OUTPUT
-echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo >> $OUTPUT
-cat "../Icon.png" | $GOPATH/bin/2goarray DataLarge icon >> $OUTPUT
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT
-    exit
-fi
-gofmt -s $OUTPUT > $OUTPUT.formatted
-mv $OUTPUT.formatted $OUTPUT
+# generate <output-file> <build-tag> <array-name> <source-image>
+generate() {
+    output="$1"
+    build_tag="$2"
+    name="$3"
+    src="$4"
 
-OUTPUT=icon_unix.go
-echo Generating $OUTPUT
-echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo >> $OUTPUT
-cat "fortunate.png" | $GOPATH/bin/2goarray Data icon >> $OUTPUT
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT
-    exit
-fi
-gofmt -s $OUTPUT > $OUTPUT.formatted
-mv $OUTPUT.formatted $OUTPUT
+    echo "Generating $output"
+    echo "$build_tag" > "$output"
+    echo >> "$output"
+    if ! "$GOPATH/bin/2goarray" "$name" icon < "$src" >> "$output"; then
+        echo "Failure generating $output"
+        exit 1
+    fi
+    gofmt -s "$output" > "$output.formatted"
+    mv "$output.formatted" "$output"
+}
 
-OUTPUT=icon_light_unix.go
-echo Generating $OUTPUT
-echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo >> $OUTPUT
-cat "fortunate-light.png" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT
-    exit
-fi
-gofmt -s $OUTPUT > $OUTPUT.formatted
-mv $OUTPUT.formatted $OUTPUT
+UNIX_TAG="//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd"
+WINDOWS_TAG="//go:build windows"
 
-OUTPUT=icon_dark_unix.go
-echo Generating $OUTPUT
-echo "//go:build linux || darwin || dragonfly || freebsd || netbsd || openbsd" > $OUTPUT
-echo >> $OUTPUT
-cat "fortunate-dark.png" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT
-    exit
-fi
-gofmt -s $OUTPUT > $OUTPUT.formatted
-mv $OUTPUT.formatted $OUTPUT
+generate large_icon_unix.go    "$UNIX_TAG"    DataLarge ../Icon.png
+generate icon_unix.go          "$UNIX_TAG"    Data      fortunate.png
+generate icon_light_unix.go    "$UNIX_TAG"    DataLight fortunate-light.png
+generate icon_dark_unix.go     "$UNIX_TAG"    DataDark  fortunate-dark.png
 
-OUTPUT_WINDOWS=large_icon_windows.go
-echo Generating $OUTPUT_WINDOWS
-echo "//go:build windows" > $OUTPUT_WINDOWS
-echo >> $OUTPUT_WINDOWS
-cat "../Icon.ico" | $GOPATH/bin/2goarray DataLarge icon >> $OUTPUT_WINDOWS
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT_WINDOWS
-    exit
-fi
-gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
-mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
+generate large_icon_windows.go "$WINDOWS_TAG" DataLarge ../Icon.ico
+generate icon_windows.go       "$WINDOWS_TAG" Data      fortunate.ico
+generate icon_light_windows.go "$WINDOWS_TAG" DataLight fortunate-light.ico
+generate icon_dark_windows.go  "$WINDOWS_TAG" DataDark  fortunate-dark.ico
 
-OUTPUT_WINDOWS=icon_windows.go
-echo Generating $OUTPUT_WINDOWS
-echo "//go:build windows" > $OUTPUT_WINDOWS
-echo >> $OUTPUT_WINDOWS
-cat "fortunate.ico" | $GOPATH/bin/2goarray Data icon >> $OUTPUT_WINDOWS
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT_WINDOWS
-    exit
-fi
-gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
-mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
-
-OUTPUT_WINDOWS=icon_light_windows.go
-echo Generating $OUTPUT_WINDOWS
-echo "//go:build windows" > $OUTPUT_WINDOWS
-echo >> $OUTPUT_WINDOWS
-cat "fortunate-light.ico" | $GOPATH/bin/2goarray DataLight icon >> $OUTPUT_WINDOWS
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT_WINDOWS
-    exit
-fi
-gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
-mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
-
-OUTPUT_WINDOWS=icon_dark_windows.go
-echo Generating $OUTPUT_WINDOWS
-echo "//go:build windows" > $OUTPUT_WINDOWS
-echo >> $OUTPUT_WINDOWS
-cat "fortunate-dark.ico" | $GOPATH/bin/2goarray DataDark icon >> $OUTPUT_WINDOWS
-if [ $? -ne 0 ]; then
-    echo Failure generating $OUTPUT_WINDOWS
-    exit
-fi
-gofmt -s $OUTPUT_WINDOWS > $OUTPUT_WINDOWS.formatted
-mv $OUTPUT_WINDOWS.formatted $OUTPUT_WINDOWS
-
-echo Finished
+echo "Finished"

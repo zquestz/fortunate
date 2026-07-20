@@ -13,7 +13,7 @@ import (
 const (
 	AppName    = "fortunate"
 	GUIAppName = "Fortunate"
-	Version    = "1.1.4"
+	Version    = "1.1.5"
 )
 
 // Config type for application configuration.

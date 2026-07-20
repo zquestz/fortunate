@@ -2,6 +2,4 @@
 
 package fyneapp
 
-func setActivationPolicy() {
-	return
-}
+func setActivationPolicy() {}

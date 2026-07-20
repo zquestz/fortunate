@@ -38,11 +38,8 @@ func startFortuneTicker() {
 	fortuneTicker = time.NewTicker(time.Hour * time.Duration(config.AppConfig.FortuneTimer))
 	defer fortuneTicker.Stop()
 
-	for {
-		select {
-		case <-fortuneTicker.C:
-			notifyFortune()
-		}
+	for range fortuneTicker.C {
+		notifyFortune()
 	}
 }
 
