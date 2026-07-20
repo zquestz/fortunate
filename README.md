@@ -47,19 +47,19 @@ yay -S fortunate
 **Arch Linux**
 
 ```bash
-sudo pacman -S git make go gcc pkg-config xorg-server-devel libxcursor libxrandr libxinerama libxi fortune-mod
+sudo pacman -S git make go gcc pkgconf libglvnd libx11 libxcursor libxrandr libxinerama libxi libxxf86vm libxkbcommon wayland fortune-mod
 ```
 
 **Debian/Ubuntu**
 
 ```bash
-sudo apt-get install git make golang gcc libgl1-mesa-dev xorg-dev fortune-mod
+sudo apt-get install git make golang gcc libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev fortune-mod
 ```
 
 **Fedora**
 
 ```bash
-sudo dnf install git make golang gcc libXcursor-devel libXrandr-devel mesa-libGL-devel libXi-devel libXinerama-devel libXxf86vm-devel fortune-mod
+sudo dnf install git make golang gcc mesa-libGL-devel libXcursor-devel libXrandr-devel libXi-devel libXinerama-devel libXxf86vm-devel wayland-devel libxkbcommon-devel fortune-mod
 ```
 
 **macOS**
