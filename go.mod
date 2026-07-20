@@ -1,6 +1,6 @@
 module github.com/zquestz/fortunate
 
-go 1.26
+go 1.25.0
 
 require (
 	fyne.io/fyne/v2 v2.8.0
@@ -13,7 +13,7 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/anthonynsimon/bild v0.16.1 // indirect
+	github.com/anthonynsimon/bild v0.14.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fredbi/uri v1.1.1 // indirect
