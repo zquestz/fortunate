@@ -23,7 +23,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev libgl-dev libxxf86vm-dev
+          sudo apt-get -y install libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev
 
       - name: Set up Go
         uses: actions/setup-go@v5
